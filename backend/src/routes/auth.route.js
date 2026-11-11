@@ -1,7 +1,6 @@
-import passport from "passport";
 import { Router } from "express";
 const authRouter = Router();
-import authController from "../controllers/auth.Controller.js";
+import authController from "../controllers/auth.controller.js";
 import validateUser from "../validators/validateUser.js";
 import handleValidationErrors from "../middlewares/handleValidationErrors.js";
 
