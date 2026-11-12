@@ -3,6 +3,6 @@ const commentRouter = Router();
 import ensureAuth from "../middlewares/ensureAuth.js";
 import commentController from "../controllers/comment.controller.js";
 
-commentRouter.post("/comments/:id", commentController.commentDelete);
+commentRouter.delete("/:id", ensureAuth, commentController.commentDelete);
 
 export default commentRouter;

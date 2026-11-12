@@ -59,7 +59,7 @@ async function blogUpdatePut(req, res, next) {
     const { title, content, isPublished } = matchedData(req);
     const userId = req.user.id;
     const blogId = req.params.id;
-    await verifyBlogOwner(userId, blogId);
+    await verifyBlogOwner({ userId, blogId });
     const updatedBlog = await updateBlog({
       blogId,
       title,
@@ -77,7 +77,7 @@ async function blogDelete(req, res, next) {
   try {
     const userId = req.user.id;
     const blogId = req.params.id;
-    await verifyBlogOwner(userId, blogId);
+    await verifyBlogOwner({ userId, blogId });
     await deleteBlog(blogId);
     return res.status(200).json({ success: true });
   } catch (error) {

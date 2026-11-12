@@ -25,13 +25,13 @@ async function createUser({ email, password, username }) {
   }
 }
 
-async function findUsername({ username }) {
+async function findUsername(username) {
   return (await prisma.user.findUnique({ where: { username: username } }))
     ? true
     : false;
 }
 
-async function findUserEmail({ email }) {
+async function findUserEmail(email) {
   return (await prisma.user.findUnique({ where: { email: email } }))
     ? true
     : false;

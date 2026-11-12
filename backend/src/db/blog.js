@@ -94,7 +94,7 @@ async function createBlog({ title, content, isPublished, userId }) {
   }
 }
 
-async function verifyBlogOwner(userId, blogId) {
+async function verifyBlogOwner({ userId, blogId }) {
   try {
     //not findUnique as it only allows @id
     const blog = await prisma.blog.findFirst({
