@@ -6,13 +6,13 @@ import "./src/config/passport.js";
 
 //routers
 import authRouter from "./src/routes/auth.route.js";
-import blogRouter from "../routes/blog.route.js";
-// import commentRouter from "./routes/comment.route.js";
-// import dashboardRouter from "./routes/dashboard.route.js";
+import blogRouter from "./src/routes/blog.route.js";
+import commentRouter from "./src/routes/comment.route";
+// import dashboardRouter from "";
 
 //middleware
-// import notFoundHandler from "./middlewares/notFoundHandler.js";
-// import errorHandler from "./middlewares/errorHandler.js";
+import notFoundHandler from "./src/middlewares/notFoundHandler.js";
+import errorHandler from "./src/middlewares/errorHandler.js";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -32,13 +32,13 @@ app.use(cors(corsOptions));
 //routes
 app.use("/api/auth", authRouter);
 app.use("/api/blogs", blogRouter);
-// app.use("/api/comments", commentRouter);
+app.use("/api/comments", commentRouter);
 // app.use("/api/dashboard", dashboardRouter);
 
 //404 route
-// app.use(notFoundHandler);
+app.use(notFoundHandler);
 
 //error route
-// app.use(errorHandler);
+app.use(errorHandler);
 
 export default app;
