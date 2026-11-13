@@ -1,5 +1,4 @@
 import prisma from "../lib/prisma.js";
-import { Prisma } from "../../generated/prisma/client.js";
 
 async function findPublishedBlogs() {
   try {

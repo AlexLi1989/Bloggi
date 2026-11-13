@@ -1,7 +1,6 @@
 import prisma from "../lib/prisma.js";
-import { Prisma } from "../../generated/prisma/client.js";
 
-async function createComment({ blogId, title, content }) {
+async function createComment({ blogId, userId, content }) {
   try {
     const comment = await prisma.comment.create({
       data: { blogId, userId, content },
