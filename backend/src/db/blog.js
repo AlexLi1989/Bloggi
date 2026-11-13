@@ -49,7 +49,7 @@ async function findAllBlogs() {
   }
 }
 
-async function findBlog(blogId) {
+async function findBlog({ blogId }) {
   try {
     const blog = await prisma.blog.findUnique({
       where: {
@@ -124,13 +124,36 @@ async function updateBlog({ blogId, title, content, isPublished }) {
   }
 }
 
-async function deleteBlog(blogId) {
+async function deleteBlog({ blogId }) {
   try {
     await prisma.blog.delete({
       where: { id: blogId },
     });
   } catch (error) {
     console.error("Failed to delete blog: ", error);
+    throw error;
+  }
+}
+
+async function findUserBlogs({ userId }) {
+  try {
+    const blogs = await prisma.blog.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        title: true,
+        isPublished: true,
+        createdAt: true,
+        updatedAt: true,
+        _count: {
+          select: { comments: true },
+        },
+      },
+    });
+    return blogs;
+  } catch (error) {
+    console.error("Failed to find user's blogs: ", error);
     throw error;
   }
 }
@@ -143,4 +166,5 @@ export {
   verifyBlogOwner,
   updateBlog,
   deleteBlog,
+  findUserBlogs,
 };

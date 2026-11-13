@@ -7,8 +7,8 @@ import "./src/config/passport.js";
 //routers
 import authRouter from "./src/routes/auth.route.js";
 import blogRouter from "./src/routes/blog.route.js";
-import commentRouter from "./src/routes/comment.route";
-// import dashboardRouter from "";
+import commentRouter from "./src/routes/comment.route.js";
+import dashboardRouter from "./src/routes/dashboard.route";
 
 //middleware
 import notFoundHandler from "./src/middlewares/notFoundHandler.js";
@@ -33,7 +33,7 @@ app.use(cors(corsOptions));
 app.use("/api/auth", authRouter);
 app.use("/api/blogs", blogRouter);
 app.use("/api/comments", commentRouter);
-// app.use("/api/dashboard", dashboardRouter);
+app.use("/api/dashboard", dashboardRouter);
 
 //404 route
 app.use(notFoundHandler);

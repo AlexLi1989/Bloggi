@@ -1,5 +1,5 @@
 import { matchedData } from "express-validator";
-import {} from "../db/comment.js";
+import { createComment, deleteComment } from "../db/comment.js";
 
 async function commentCreatePost(req, res, next) {
   try {

@@ -23,7 +23,7 @@ async function blogsGet(req, res, next) {
 async function blogGet(req, res, next) {
   try {
     const blogId = req.params.id;
-    const blog = await findBlog(blogId);
+    const blog = await findBlog({ blogId });
     if (!blog)
       return res
         .status(404)
@@ -78,7 +78,7 @@ async function blogDelete(req, res, next) {
     const userId = req.user.id;
     const blogId = req.params.id;
     await verifyBlogOwner({ userId, blogId });
-    await deleteBlog(blogId);
+    await deleteBlog({ blogId });
     return res.status(200).json({ success: true });
   } catch (error) {
     return next(error);
