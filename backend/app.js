@@ -8,7 +8,7 @@ import "./src/config/passport.js";
 import authRouter from "./src/routes/auth.route.js";
 import blogRouter from "./src/routes/blog.route.js";
 import commentRouter from "./src/routes/comment.route.js";
-import dashboardRouter from "./src/routes/dashboard.route";
+import dashboardRouter from "./src/routes/dashboard.route.js";
 
 //middleware
 import notFoundHandler from "./src/middlewares/notFoundHandler.js";
@@ -20,6 +20,7 @@ const __dirname = dirname(__filename);
 app.use(express.static(join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.set("trust proxy", 1); //for deployment
 
 //cors config
 const corsOptions = {
