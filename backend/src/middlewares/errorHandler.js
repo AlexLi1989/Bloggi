@@ -3,12 +3,32 @@ function errorHandler(err, req, res, next) {
   console.error(err);
   let statusCode;
   let details = {};
+
+  // resource not exist
+  if (err.code == "P2003") {
+    statusCode = 404;
+    details = {
+      success: false,
+      message:
+        "The related data does not exist, or it is currently referenced by other items.",
+    };
+  }
+
+  // record not found
+  else if (err.code == "P2025") {
+    statusCode = 404;
+    details = {
+      success: false,
+      message: "Record not found.",
+    };
+  }
+
   // wrong id
-  if (err.code == "P2023") {
+  else if (err.code == "P2023") {
     statusCode = 400;
     details = {
       success: false,
-      message: err.message || "Bad request.",
+      message: "Invalid ID format.",
     };
   }
 

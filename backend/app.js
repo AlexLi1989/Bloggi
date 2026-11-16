@@ -24,9 +24,10 @@ app.set("trust proxy", 1); //for deployment
 
 //cors config
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: [process.env.VIEW_CLIENT_URL, process.env.WRITE_CLIENT_URL].filter(
+    Boolean,
+  ), // filter boolean in case missing either url
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
 };
 app.use(cors(corsOptions));
 
