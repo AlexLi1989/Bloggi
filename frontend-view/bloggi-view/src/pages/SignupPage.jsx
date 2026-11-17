@@ -90,7 +90,7 @@ export default function SignupPage() {
   return (
     <section>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         {apiError && <div>{apiError}</div>}
         <div>
           <label htmlFor="userName">User Name:</label>
