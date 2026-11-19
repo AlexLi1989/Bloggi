@@ -16,4 +16,19 @@ api.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
+//config response interceptor to check for overdue token
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (
+      error.response?.status === 401 &&
+      window.location.pathname !== "/login"
+    ) {
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  },
+);
+
 export default api;

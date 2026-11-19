@@ -42,7 +42,7 @@ export default function HomePage() {
               return (
                 <li key={blog.id}>
                   <h3>{blog.title}</h3>
-                  <p>{blog.user.username}</p>
+                  <p>Created by: {blog.user.username}</p>
                   <p>{new Date(blog.createdAt).toLocaleDateString()}</p>
                   {!blog.isPublished && <span>[Draft]</span>}
                   <Link to={`/blogs/${blog.id}`}>Show more</Link>
