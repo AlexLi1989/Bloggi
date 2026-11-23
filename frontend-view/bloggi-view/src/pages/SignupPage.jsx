@@ -88,12 +88,28 @@ export default function SignupPage() {
   };
 
   return (
-    <section>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit} noValidate>
-        {apiError && <div>{apiError}</div>}
+    <section className="max-w-md mx-auto bg-white p-8 rounded-2xl border border-stone-200 shadow-xs space-y-6">
+      <div className="flex flex-col items-start text-left gap-1">
+        <h1 className="text-2xl font-bold tracking-tight text-stone-900">
+          Create an account
+        </h1>
+        <p className="text-sm font-normal text-stone-500 pl-0.5">
+          Join Bloggi to read more and share your thoughts.
+        </p>
+      </div>
+      <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        {apiError && (
+          <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+            {apiError}
+          </div>
+        )}
         <div>
-          <label htmlFor="userName">User Name:</label>
+          <label
+            htmlFor="userName"
+            className="block text-sm font-medium text-stone-700 mb-1"
+          >
+            User Name:
+          </label>
           <input
             type="text"
             id="userName"
@@ -104,11 +120,19 @@ export default function SignupPage() {
               setUsername(e.target.value);
             }}
             required
+            className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500/20 transition"
           />
-          {errors.username && <p>{errors.username}</p>}
+          {errors.username && (
+            <p className="mt-1 text-xs text-red-600 px-1">{errors.username}</p>
+          )}
         </div>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-stone-700 mb-1"
+          >
+            Email:
+          </label>
           <input
             type="email"
             id="email"
@@ -118,12 +142,20 @@ export default function SignupPage() {
               setEmail(e.target.value);
             }}
             required
+            className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500/20 transition"
           />
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && (
+            <p className="mt-1 text-xs text-red-600 px-1">{errors.email}</p>
+          )}
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
-          <div>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-stone-700 mb-1"
+          >
+            Password:
+          </label>
+          <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
               id="password"
@@ -133,19 +165,28 @@ export default function SignupPage() {
                 setPassword(e.target.value);
               }}
               required
+              className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500/20 transition pr-10"
             />
             <button
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 cursor-pointer"
             >
               👁️
             </button>
-            {errors.password && <p>{errors.password}</p>}
           </div>
+          {errors.password && (
+            <p className="mt-1 text-xs text-red-600 px-1">{errors.password}</p>
+          )}
         </div>
         <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <div>
+          <label
+            htmlFor="confirmPassword"
+            className="block text-sm font-medium text-stone-700 mb-1"
+          >
+            Confirm Password:
+          </label>
+          <div className="relative">
             <input
               type={showConfirmPassword ? "text" : "password"}
               id="confirmPassword"
@@ -155,17 +196,27 @@ export default function SignupPage() {
                 setConfirmPassword(e.target.value);
               }}
               required
+              className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500/20 transition pr-10"
             />
             <button
               type="button"
               onClick={() => setShowConfirmPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 cursor-pointer"
             >
               👁️
             </button>
-            {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
           </div>
+          {errors.confirmPassword && (
+            <p className="mt-1 text-xs text-red-600 px-1">
+              {errors.confirmPassword}
+            </p>
+          )}
         </div>
-        <button type="submit" disabled={isSubmitting}>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 disabled:opacity-50 transition cursor-pointer"
+        >
           {isSubmitting ? "Signing up..." : "Sign Up"}
         </button>
       </form>

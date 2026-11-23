@@ -56,49 +56,77 @@ export default function LoginPage() {
   };
 
   return (
-    <section>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit} noValidate>
-        {apiError && <div>{apiError}</div>}
+    <section className="max-w-md mx-auto bg-white p-8 rounded-2xl border border-stone-200 shadow-xs space-y-6">
+      <div className="text-center space-y-1">
+        <h1 className="text-2xl font-bold tracking-tight text-stone-900">
+          Welcome back
+        </h1>
+        <p className="text-sm text-stone-500">Log in to your Bloggi account.</p>
+      </div>
+
+      <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        {apiError && (
+          <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+            {apiError}
+          </div>
+        )}
+
         <div>
-          <label htmlFor="email">Email:</label>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-stone-700 mb-1"
+          >
+            Email
+          </label>
           <input
             type="email"
             id="email"
             name="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
             autoComplete="email"
-            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition"
           />
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && (
+            <p className="mt-1 text-xs text-red-600">{errors.email}</p>
+          )}
         </div>
+
         <div>
-          <label htmlFor="password">Password:</label>
-          <div>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-stone-700 mb-1"
+          >
+            Password
+          </label>
+          <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
               id="password"
               name="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
               autoComplete="current-password"
-              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-lg border border-stone-300 pl-3.5 pr-10 py-2.5 text-sm text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition"
             />
             <button
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 cursor-pointer"
             >
               👁️
             </button>
-            {errors.password && <p>{errors.password}</p>}
           </div>
+          {errors.password && (
+            <p className="mt-1 text-xs text-red-600">{errors.password}</p>
+          )}
         </div>
-        <button type="submit" disabled={isSubmitting}>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 disabled:opacity-50 transition cursor-pointer"
+        >
           {isSubmitting ? "Logging in..." : "Log in"}
         </button>
       </form>
