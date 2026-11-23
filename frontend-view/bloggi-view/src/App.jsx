@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ErrorPage from "./pages/ErrorPage";
+import UnauthedRoute from "./components/UnauthedRoute";
 
 const defaultRouter = createBrowserRouter([
   {
@@ -16,8 +17,14 @@ const defaultRouter = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
           { index: true, element: <HomePage /> },
-          { path: "/login", element: <LoginPage /> },
-          { path: "/signup", element: <SignupPage /> },
+          {
+            element: <UnauthedRoute />,
+            children: [
+              { path: "/login", element: <LoginPage /> },
+              { path: "/signup", element: <SignupPage /> },
+            ],
+          },
+
           { path: "/blogs/:id", element: <BlogDetailPage /> },
           { path: "*", element: <ErrorPage /> },
         ],
