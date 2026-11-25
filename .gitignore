@@ -12,7 +12,6 @@
 # Database & ORM
 *.db
 *.db-journal
-**/prisma/migrations/
 
 # OS & Editor Specific Files
 .DS_Store
