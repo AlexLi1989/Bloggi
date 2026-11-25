@@ -47,16 +47,16 @@ Bloggi is a web application that allows unregistered user to view published blog
 
 ### Back-end
 
-| Layer      | Technology         |
-| ---------- | ------------------ |
-| Runtime    | Node.js (ESM)      |
-| Framework  | Express 5          |
-| ORM        | Prisma 7           |
-| Database   | PostgreSQL         |
-| Auth       | JWT & Passport-jwt |
-| Hash       | bcryptjs           |
-| Security   | cors               |
-| Validation | express-validator  |
+| Layer      | Technology                 |
+| ---------- | -------------------------- |
+| Runtime    | Node.js (ESM)              |
+| Framework  | Express 5                  |
+| ORM        | Prisma 7                   |
+| Database   | PostgreSQL                 |
+| Auth       | JWT & Passport-jwt         |
+| Hash       | bcryptjs                   |
+| Security   | cors, express-rate-limit   |
+| Validation | express-validator          |
 
 ### Front-end (Bloggi View & Bloggi Write)
 
@@ -252,8 +252,8 @@ To secure operations across both Bloggi-View and Bloggi-Write, the backend imple
 
 | Method | Endpoint           | Access | Description                                                            |
 | :----- | :----------------- | :----- | :--------------------------------------------------------------------- |
-| `POST` | `/api/auth/signup` | Public | Registers a new user, hashes the password, and creates a record in DB. |
-| `POST` | `/api/auth/login`  | Public | Validates user credentials and issues a signed JWT valid for 12 hours. |
+| `POST` | `/api/auth/signup` | Public | Registers a new user, hashes the password, and creates a record in DB. Rate limited: max 10 requests per 15 minutes per IP (returns 429) |
+| `POST` | `/api/auth/login`  | Public | Validates user credentials and issues a signed JWT valid for 12 hours. Rate limited: max 10 requests per 15 minutes per IP (returns 429) |
 
 #### Blog Management
 
@@ -281,7 +281,7 @@ To secure operations across both Bloggi-View and Bloggi-Write, the backend imple
 | `/login`    | Unauthed Only   | Validates login.                                                                                     |
 | `/logout`   | Protected Guard | Clears client-side tokens and redirects to login.                                                    |
 | `/signup`   | Unauthed Only   | Handles account creation form rendering and preliminary validation.                                  |
-| `/blog/:id` | Dynamic         | Displays full text and the comment section. Members will also see additional section for commenting. |
+| `/blogs/:id` | Dynamic         | Displays full text and the comment section. Members will also see additional section for commenting. |
 
 ---
 
@@ -292,7 +292,7 @@ To secure operations across both Bloggi-View and Bloggi-Write, the backend imple
 | `/login`          | Unauthed Only   | Workspace entry point.                                |
 | `/logout`         | Protected Guard | Clears client-side tokens and redirects to login.     |
 | `/dashboard`      | Protected Guard | Lists all blogs owned by the author with quick stats. |
-| `/blog/:id`       | Protected Guard | See details of the blog and its comments.             |
+| `/blogs/:id`       | Protected Guard | See details of the blog and its comments.             |
 | `/write/new`      | Protected Guard | Editor to create a new blog post.                     |
 | `/write/edit/:id` | Protected Guard | Editor to update an existing blog post.               |
 
