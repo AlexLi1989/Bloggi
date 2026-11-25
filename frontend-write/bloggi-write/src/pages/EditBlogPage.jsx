@@ -107,20 +107,20 @@ export default function EditBlogPage() {
   if (isLoading) {
     return (
       <div className="py-20 text-center text-stone-500 animate-pulse">
-        Loading articles...
+        Loading article...
       </div>
     );
   }
 
   if (fetchError) {
     return (
-      <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-600 text-center space-y-3">
+      <div className="p-6 rounded-xl bg-red-50 border border-red-200 text-red-700 text-center space-y-3">
         <p className="font-medium">{fetchError}</p>
         <Link
           to="/dashboard"
-          className="inline-flex items-center justify-center text-sm underline text-black hover:text-blue-900"
+          className="inline-block text-sm underline hover:text-red-900"
         >
-          ← Back to Home
+          ← Back to Dashboard
         </Link>
       </div>
     );
@@ -129,79 +129,98 @@ export default function EditBlogPage() {
   if (!blog) return null;
 
   return (
-    <section className="max-w-md mx-auto bg-white p-8 rounded-2xl border border-stone-200 shadow-xs space-y-6">
-      <div className="flex flex-col items-start text-left gap-1">
+    <section className="max-w-2xl mx-auto bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-xs space-y-6">
+      <div className="border-b border-stone-100 pb-4">
         <h1 className="text-2xl font-bold tracking-tight text-stone-900">
           Edit your article
         </h1>
+        <p className="mt-1 text-sm text-stone-500">
+          Update your content or change its publication status.
+        </p>
       </div>
-      <form onSubmit={handleSubmit} noValidate className="space-y-4">
+
+      <form onSubmit={handleSubmit} noValidate className="space-y-5">
         {apiError && (
           <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
             {apiError}
           </div>
         )}
+
         <div>
           <label
             htmlFor="title"
-            className="block text-sm font-medium text-stone-700 mb-1"
+            className="block text-sm font-medium text-stone-700 mb-1.5"
           >
-            Title:
+            Title
           </label>
           <input
             type="text"
             id="title"
             name="title"
             value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            onChange={(e) => setTitle(e.target.value)}
             required
-            className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500/20 transition"
+            className="w-full rounded-lg border border-stone-300 px-3.5 py-2.5 text-base font-medium text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition"
           />
           {errors.title && (
-            <p className="mt-1 text-xs text-red-600 px-1">{errors.title}</p>
+            <p className="mt-1 text-xs text-red-600">{errors.title}</p>
           )}
         </div>
+
         <div>
           <label
             htmlFor="content"
-            className="block text-sm font-medium text-stone-700 mb-1"
+            className="block text-sm font-medium text-stone-700 mb-1.5"
           >
-            Content:
+            Content
           </label>
           <textarea
             id="content"
             name="content"
+            rows="12"
             value={content}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
+            onChange={(e) => setContent(e.target.value)}
             required
-            className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500/20 transition"
-          ></textarea>
-
+            className="w-full rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm sm:text-base leading-relaxed text-stone-800 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition"
+          />
           {errors.content && (
-            <p className="mt-1 text-xs text-red-600 px-1">{errors.content}</p>
+            <p className="mt-1 text-xs text-red-600">{errors.content}</p>
           )}
         </div>
-        <div>
-          <label
-            htmlFor="isPublished"
-            className="text-sm font-medium text-stone-700"
-          >
-            Publish:
-          </label>
+
+        <div className="flex items-center gap-2.5 p-3.5 rounded-lg bg-stone-50 border border-stone-200">
           <input
             type="checkbox"
             id="isPublished"
             name="isPublished"
             checked={isPublished}
             onChange={(e) => setIsPublished(e.target.checked)}
+            className="h-4 w-4 rounded border-stone-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
           />
+          <label
+            htmlFor="isPublished"
+            className="text-sm font-medium text-stone-700 cursor-pointer select-none"
+          >
+            Published
+          </label>
         </div>
-        <button type="submit">Save Changes</button>
+
+        <div className="flex items-center justify-end gap-3 pt-2">
+          <Link
+            to={`/blogs/${id}`}
+            className="px-4 py-2.5 rounded-lg border border-stone-300 text-sm font-medium text-stone-700 hover:bg-stone-100 transition"
+          >
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            className="px-6 py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition cursor-pointer"
+          >
+            Save Changes
+          </button>
+        </div>
       </form>
+
       <ConfirmModal
         isOpen={Boolean(modalConfig)}
         isLoading={isProcessing}

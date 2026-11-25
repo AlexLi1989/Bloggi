@@ -60,11 +60,15 @@ export default function NewBlogPage() {
   };
 
   return (
-    <section className="max-w-md mx-auto bg-white p-8 rounded-2xl border border-stone-200 shadow-xs space-y-6">
-      <div className="flex flex-col items-start text-left gap-1">
+    <section className="max-w-2xl mx-auto bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-xs space-y-6">
+      <div className="border-b border-stone-100 pb-4">
         <h1 className="text-2xl font-bold tracking-tight text-stone-900">
           Post a new article
         </h1>
+        <p className="mt-1 text-sm text-stone-500">
+          Write your story and choose whether to publish it now or save as a
+          draft.
+        </p>
       </div>
       <form onSubmit={handleSubmit} noValidate className="space-y-4">
         {apiError && (
@@ -105,6 +109,7 @@ export default function NewBlogPage() {
             id="content"
             name="content"
             value={content}
+            row="12"
             onChange={(e) => {
               setContent(e.target.value);
             }}
@@ -116,10 +121,10 @@ export default function NewBlogPage() {
             <p className="mt-1 text-xs text-red-600 px-1">{errors.content}</p>
           )}
         </div>
-        <div>
+        <div className="flex items-center gap-2.5 p-3.5 rounded-lg bg-stone-50 border border-stone-200">
           <label
             htmlFor="isPublished"
-            className="text-sm font-medium text-stone-700"
+            className="text-sm font-medium text-stone-700 cursor-pointer select-none"
           >
             Publish immediately
           </label>
@@ -129,6 +134,7 @@ export default function NewBlogPage() {
             name="isPublished"
             checked={isPublished}
             onChange={(e) => setIsPublished(e.target.checked)}
+            className="h-4 w-4 rounded border-stone-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
           />
         </div>
         <button

@@ -1,8 +1,6 @@
-import validator from "validator";
 import { useState } from "react";
 import api from "../api/axios.js";
-import { Link } from "react-router-dom";
-import ConfirmModal from "../components/ConfirmModal";
+import ConfirmModal from "./ConfirmModal.jsx";
 
 export default function CommentSection({ initialComments }) {
   const [comments, setComments] = useState(initialComments || []);
@@ -14,6 +12,7 @@ export default function CommentSection({ initialComments }) {
       title: "Delete Comment",
       message: "Are you sure you want to delete this comment?",
       confirmText: "Delete",
+      mode: "danger",
       onConfirm: async () => {
         setIsProcessing(true);
         try {
@@ -23,7 +22,6 @@ export default function CommentSection({ initialComments }) {
           );
           setModalConfig(null);
         } catch (error) {
-          //set modal to alert mode if failed
           setModalConfig({
             title: "Error",
             message:
@@ -41,42 +39,49 @@ export default function CommentSection({ initialComments }) {
 
   return (
     <section className="space-y-6">
-      <h2 className="pt-3 text-xl font-bold text-stone-900">
+      <h2 className="text-xl font-bold text-stone-900">
         Comments ({comments.length})
       </h2>
+
       {comments.length === 0 ? (
-        <p className="text-sm text-stone-500 py-4">No comments yet.</p>
+        <div className="p-8 text-center text-sm text-stone-500 bg-white rounded-xl border border-stone-200">
+          No comments on this article yet.
+        </div>
       ) : (
         <ul className="space-y-4">
-          {comments &&
-            comments.map((comment) => {
-              return (
-                <li
-                  key={comment.id}
-                  className="bg-white p-5 rounded-xl border border-stone-200 space-y-2"
+          {comments.map((comment) => (
+            <li
+              key={comment.id}
+              className="bg-white p-5 rounded-xl border border-stone-200 space-y-2.5"
+            >
+              <div className="flex justify-between items-center text-xs text-stone-500">
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-stone-800">
+                    {comment.user.username}
+                  </span>
+                  <span>•</span>
+                  <time>
+                    {new Date(comment.createdAt).toLocaleDateString()}
+                  </time>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => openDeleteModal(comment.id)}
+                  className="text-xs font-medium text-red-500 hover:text-red-700 transition cursor-pointer"
                 >
-                  <div className="flex justify-between items-center text-xs text-stone-500">
-                    <span className="font-semibold text-stone-800">
-                      {comment.user.username}
-                    </span>{" "}
-                    <time>
-                      {new Date(comment.createdAt).toLocaleDateString()}
-                    </time>
-                  </div>
-                  <p className="text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">
-                    {comment.content}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => openDeleteModal(comment.id)}
-                  >
-                    Delete
-                  </button>
-                </li>
-              );
-            })}
+                  Delete
+                </button>
+              </div>
+
+              <p className="text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">
+                {comment.content}
+              </p>
+            </li>
+          ))}
         </ul>
       )}
+
       <ConfirmModal
         isOpen={Boolean(modalConfig)}
         isLoading={isProcessing}
