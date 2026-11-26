@@ -1,12 +1,13 @@
 # Bloggi
 
-Bloggi is a web application that allows unregistered user to view published blogs, registered user to view both published and unpublished blogs and leave comments on Bloggi View. And allows registered user to write and edit blogs ,and delete comments of their blogs on Bloggi Write. The front-end is separated into two sites(View and Write) as a form of self-challenge.
+**Bloggi** is a full-stack, decoupled dual-frontend blogging platform built as an architectural self-challenge. It separates the public reading experience (**Bloggi View**) from the private creator workspace (**Bloggi Write**), powered by a shared RESTful API and stateless JWT authentication.
 
 ---
 
 ## Table of Contents
 
 - [Features](#features)
+- [Live Demo](#live-demo)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Database Architecture](#database-architecture)
@@ -42,7 +43,13 @@ Bloggi is a web application that allows unregistered user to view published blog
   - **Deletion**: Delete any comment under own blogs.
 
 ---
+## Live Demo
 
+* **Reader Platform (Bloggi View):** [https://bloggi-view.onrender.com](https://bloggi-view.onrender.com)
+* **Creator Studio (Bloggi Write):** [https://bloggi-write.onrender.com](https://bloggi-write.onrender.com)
+
+
+---
 ## Tech Stack
 
 ### Back-end
@@ -300,41 +307,14 @@ To secure operations across both Bloggi-View and Bloggi-Write, the backend imple
 
 ## Roadmap
 
-Phase 1: Backend & Database Foundation
+- [x] **Phase 1:** Backend & Database Foundation (Express, Prisma 7, PostgreSQL, JWT Auth)
+- [x] **Phase 2:** Core RESTful APIs & Role-Based Ownership Permissions
+- [x] **Phase 3:** Bloggi View — Public Reader Platform (Dynamic Feed, Comments, Auth Guards)
+- [x] **Phase 4:** Bloggi Write — Creator Dashboard (Stats, CRUD Editor, Custom Confirmation Modals)
+- [x] **Phase 5:** Production Deployment (Supabase & Render)
 
-• Create folder structure and configure the global .gitignore.
-• Initialize Prisma Schema, define relationships, and push to PostgreSQL.
-• Implement user registration (/signup) with Bcrypt password hashing.
-• Implement login (/login) and configure Passport-JWT to issue 12h tokens.
-• Configure global cors middleware in Express to accept dual-frontend ports.
-• Verify all Auth endpoints via Postman.
-
-Phase 2: Core RESTful APIs & Permissions
-
-• Implement Blog CRUD routes (handling draft vs. published filtering logic).
-• Implement Comment creation and comment deletion API.
-• Secure routes with JWT middleware (Auth Required guard).
-• Inject strict ownership checks in controllers (preventing unauthorized PUT/DELETE).
-• Verify all data endpoints and error responses via Postman.
-
-Phase 3: Bloggi View (Reader App)
-
-• Scaffold Vite/React project and set up Tailwind CSS.
-• Implement Axios instance with request interceptors to automatically attach JWT.
-• Build Home feed (/) and Blog detail page (/blog/:id) with Dynamic fetching.
-• Implement Sign-up, Sign-in, and full Client-side Token management.
-• Add conditional UI rendering (hiding comment form for unauthenticated guests).
-
-Phase 4: Bloggi Write (Author App)
-
-• Scaffold the second Vite/React project.
-• Build the global <ProtectedRoute /> wrapper component for route guarding.
-• Connect Dashboard (/dashboard) to fetch current user's blogs only.
-• Build workspace Editor components for both creating (/write/new) and editing (/write/edit/:id).
-• Integrate comment deletion triggers on the post detail view.
-
-The following features are planned for future releases:
-
-- **Admin role** — Admins will have access to detailed statistics, user management, and advanced settings.
+### Planned for Future Releases
+- **Admin Role:** System-wide user management, moderation tools, and advanced analytics.
+- **Rich Text / Markdown Support:** Enhanced writing experience with with live preview and image uploads.
 
 ---
