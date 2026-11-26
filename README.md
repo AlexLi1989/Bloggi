@@ -8,6 +8,7 @@
 
 - [Features](#features)
 - [Live Demo](#live-demo)
+
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Database Architecture](#database-architecture)
@@ -46,8 +47,12 @@
 ## Live Demo
 
 * **Reader Platform (Bloggi View):** [https://bloggi-view.onrender.com](https://bloggi-view.onrender.com)
-* **Creator Studio (Bloggi Write):** [https://bloggi-write.onrender.com](https://bloggi-write.onrender.com)
+  <img width="1365" height="1358" alt="Bloggi-view_1" src="https://github.com/user-attachments/assets/5450d965-0fde-4afd-99b7-caa5f8760b4c" />
+  <img width="1365" height="1358" alt="Bloggi_view_2" src="https://github.com/user-attachments/assets/882a8bd2-c7a0-4e18-b187-4c4df6c8a6bf" />
 
+* **Creator Studio (Bloggi Write):** [https://bloggi-write.onrender.com](https://bloggi-write.onrender.com)
+  <img width="1365" height="1358" alt="Bloggi_write_1" src="https://github.com/user-attachments/assets/0a74c505-95f8-4d32-bb6e-4f3c1bec2044" />
+  <img width="1365" height="1358" alt="Bloggi_write_2" src="https://github.com/user-attachments/assets/c12ed008-5684-4d71-b50f-3c2bcf684e05" />
 
 ---
 ## Tech Stack
