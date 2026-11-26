@@ -94,36 +94,41 @@ Bloggi/
 │   ├── package.json
 │   ├── server.js
 │   ├── app.js
+│   ├── prisma.config.ts
 │   ├── prisma/
 │   │   └── schema.prisma
-│   └──src/
+│   └── src/
 │       ├── config/
 │       ├── controllers/
 │       ├── db/
+│       ├── lib/
 │       ├── middlewares/
 │       ├── routes/
-│       ├── lib/
 │       └── validators/
 │
 ├── frontend-view/
-│   ├── package.json
-│   ├── vite.config.js
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── ...
-│   └── ...
+│   └── bloggi-view/
+│       ├── package.json
+│       ├── vite.config.js
+│       └── src/
+│           ├── api/
+│           ├── components/
+│           ├── context/
+│           └── pages/
 │
 └── frontend-write/
-    ├── package.json
-    ├── vite.config.js
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   └── ...
-    └── ...
+    └── bloggi-write/
+        ├── package.json
+        ├── vite.config.js
+        └── src/
+            ├── api/
+            ├── components/
+            ├── context/
+            └── pages/
+
 
 ```
+
 
 ---
 
